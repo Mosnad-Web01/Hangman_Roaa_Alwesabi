@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Hangman</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <div class="welcome-container">
+        <h1 class="welcome-text">Welcome to the Hangman Game!</h1>
+        <button id="start-button">Start</button>
+    </div>
+
+    <!-- إضافة عنصر الصوت -->
+    <audio id="creaky-door-sound" autoplay>
+        <source src="audio/Scary Door Creak Sound Effect(M4A_128K).mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        document.getElementById('start-button').addEventListener('click', () => {
+            window.location.href = "game.html"; 
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <!-- Import creepy font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="welcome-container" id="welcome-screen">
+        <h1 class="welcome-text">Welcome to the Hangman Game!</h1>
+        <button id="start-button">Start</button>
+    </div>
+
+    <div class="game-container" id="game-screen" style="display: none;">
+        <div id="hangman"></div>
+        <div id="hint"></div>
+        <div id="word-blanks"></div>
+        <div id="alphabet-buttons"></div>
+        <div id="lives-counter">Lives: 10</div>
+        <button id="play-again" style="display: none;">Play Again</button>
+    </div>
+
+    <!-- Add audio elements -->
+    <audio id="background-music" loop>
+        <source src="path/to/creepy-background-music.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="error-sound">
+        <source src="path/to/error-sound.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="game-over-sound">
+        <source src="path/to/game-over-sound.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Game Over Pop-up -->
+    <div id="game-over-popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <img src="images/end.jpg" alt="Game Over" class="end-image">
+            <h2 class="popup-text">You Lost! The correct word was </h2>
+            <button id="restart-button" class="restart-button">Play Again</button>
+        </div>
+    </div>
+
+   <!-- Win Pop-up -->
+<div id="win-popup" class="popup" style="display: none;">
+    <div class="popup-content">
+        <h2 id="win-message" class="popup-text"></h2>
+        <button id="play-again-win" class="restart-button">Play Again</button>
+    </div>
+</div>
+<audio id="dark-music" loop>
+    <source src="audio/Dark Music - Death Hymn(M4A_128K).mp3" type="audio/mpeg">
+</audio>
+<audio id="thunder-sound" loop>
+    <source src="audio/Best thunder sound for sleep _thunder _rain _sleep(M4A_128K).mp3" type="audio/mpeg">
+</audio>
+<audio id="sad-music">
+    <source src="audio/Death Sad.mp3" type="audio/mpeg">
+</audio>
+<audio id="game-over-sad-music">
+    <source src="audio/sad music_sad.mp3" type="audio/mpeg">
+</audio>
+
+    <script src="scripts/game.js"></script>
+</body>
+</html>

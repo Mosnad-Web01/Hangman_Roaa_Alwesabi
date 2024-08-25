@@ -1,0 +1,223 @@
+/* Import Creepster font for a spooky look */
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Creepster', Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+}
+
+/* Welcome Screen */
+.welcome-container {
+    background-image: url('../images/10.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.welcome-text {
+    font-size: 6vw; /* Adjusted to be responsive */
+    text-transform: uppercase;
+    letter-spacing: 0.5vw; /* Adjusted to be responsive */
+    text-shadow: 4px 4px 8px #000;
+    margin-bottom: 5vh; /* Adjusted to be responsive */
+    color: #ff0000;
+    animation: text-appear 2s ease-in-out;
+}
+
+@keyframes text-appear {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#start-button {
+    font-size: 2.0vw; /* Adjusted to be responsive */
+    padding: 1vw 3vw; /* Adjusted to be responsive */
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #ff0000;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#start-button:hover {
+    background-color: #ff0000;
+    transform: scale(1.05);
+}
+
+/* Pop-ups */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #000;
+    border: 2px solid #ff0000;
+    border-radius: 10px;
+    padding: 4vw; /* تقليل الحشو */
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 0 0 20px #ff0000;
+}
+
+.popup-content {
+    margin: 2vw; /* احتفظ بنفس التباعد */
+}
+
+.popup h2 {
+    font-size: 2.5vw; /* تقليل حجم النص */
+    color: #ff0000;
+    margin-bottom: 2.5vh; /* تقليل المسافة السفلية */
+}
+
+.popup p {
+    font-size: 2.5vw; /* تقليل حجم النص */
+    margin-bottom: 2.5vh; /* تقليل المسافة السفلية */
+}
+
+.restart-button {
+    font-size: 2.5vw; /* تقليل حجم النص */
+    padding: 1.2vw 3.5vw; /* تقليل الحشو */
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.restart-button:hover {
+    background-color: #ff0000;
+    color: #000;
+    border: 2px solid #000;
+}
+
+/* Images */
+.end-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-height: 15vh; /* تقليل حجم الصورة */
+    margin-bottom: 3vh; /* احتفظ بنفس المسافة السفلية */
+}
+
+/* Game Screen */
+.game-container {
+    text-align: center;
+    padding: 4vh 4vw; /* تقليل الحشو */
+    min-height: 100vh;
+    background-color: #000;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.5s ease-in-out;
+}
+
+#hangman img {
+    width: 40vw; /* تقليل عرض الصورة */
+    height: auto; /* الحفاظ على النسبة */
+    object-fit: contain;
+    border: 4px solid #ff0000; /* تقليل عرض الحدود */
+    border-radius: 10px;
+    box-shadow: 0 0 20px #ff0000;
+    margin-bottom: 2vh; /* تقليل المسافة السفلية */
+}
+
+#hint {
+    font-size: 2vw; /* تقليل حجم النص */
+    margin-bottom: 1.5vh; /* تقليل المسافة السفلية */
+    color: #ffff00;
+    text-shadow: 2px 2px 8px #000;
+}
+
+#word-blanks {
+    font-size: 2.5vw; /* تقليل حجم النص */
+    letter-spacing: 0.4vw; /* تقليل التباعد بين الحروف */
+    margin-bottom: 2.5vh; /* تقليل المسافة السفلية */
+    text-shadow: 2px 2px 4px #000;
+}
+
+#alphabet-buttons {
+    margin-bottom: 2vh; /* احتفظ بنفس المسافة السفلية */
+}
+
+#alphabet-buttons button {
+    font-size: 2vw; /* تقليل حجم النص */
+    margin: 0.6vw; /* تقليل المسافة بين الأزرار */
+    padding: 0.6vw 0.6vw; /* تقليل الحشو */
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#alphabet-buttons button:hover:not(:disabled) {
+    background-color: #ff0000;
+    transform: scale(1.1);
+}
+
+#alphabet-buttons button:disabled {
+    background-color: #555;
+    color: #333;
+    border-color: #333;
+    cursor: not-allowed;
+}
+
+#lives-counter {
+    font-size: 2vw; /* تقليل حجم النص */
+    color: #ff0000;
+    margin-bottom: 2vh; /* تقليل المسافة السفلية */
+    text-shadow: 2px 2px 8px #000;
+}
+
+#play-again {
+    padding: 1.2vw 3.5vw; /* تقليل الحشو */
+    font-size: 3vw; /* تقليل حجم النص */
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #ff0000;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#play-again:hover {
+    background-color: #ff0000;
+    transform: scale(1.05);
+}
+
+/* Media Queries for smaller screens */
+@media (max-width: 768px) {
+    .welcome-text {
+        font-size: 6vw; /* تقليل حجم النص */
+    }
+
+    #start-button, .restart-button, #play-again {
+        font-size: 4vw; /* تقليل حجم النص */
+        padding: 2.5vw 5.5vw; /* تقليل الحشو */
+    }
+
+    #hangman img {
+        width: 60vw; /* تقليل عرض الصورة */
+    }
+
+    #alphabet-buttons button {
+        font-size: 4.5vw; /* تقليل حجم النص */
+        padding: 1.5vw 3.5vw; /* تقليل الحشو */
+    }
+}
