@@ -38,6 +38,7 @@ const gameOverPopup = document.getElementById('game-over-popup');
 const restartButton = document.getElementById('restart-button');
 const winPopup = document.getElementById('win-popup');
 const winMessage = document.getElementById('win-message');
+
 // Hint list
 const hints = [
     { word: 'apple', hint: 'A common fruit' },
@@ -272,8 +273,8 @@ document.head.appendChild(style);
 function startGame() {
     welcomeScreen.style.display = 'none';
     gameScreen.style.display = 'block';
-    darkMusic.play();  // Play the dark music at the beginning
     resetGame();
 }
+
 // Start the game when the page loads
 window.onload = startGame;
