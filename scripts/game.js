@@ -125,63 +125,139 @@ const hints = [
     { word: 'forest', hint: 'A large area covered chiefly with trees' },
     { word: 'gold', hint: 'A precious yellow metal' },
     { word: 'helmet', hint: 'A protective head covering' },
-    { word: 'igloo', hint: 'A dome-shaped house built from ice' },
-    { word: 'jigsaw', hint: 'A puzzle with interlocking pieces' },
-    { word: 'key', hint: 'A small metal object used to open locks' },
-    { word: 'lighthouse', hint: 'A tower with a light that guides ships' },
-    { word: 'mushroom', hint: 'A fungus with a stem and cap' },
-    { word: 'notebook', hint: 'A book of blank pages for writing notes' },
-    { word: 'octopus', hint: 'A sea creature with eight arms' },
-    { word: 'penguin', hint: 'A flightless bird living in the southern hemisphere' },
+    { word: 'internet', hint: 'A global network connecting millions of computers' },
+    { word: 'juice', hint: 'A drink made from fruit' },
+    { word: 'koala', hint: 'A marsupial native to Australia' },
+    { word: 'ladder', hint: 'A structure used for climbing' },
+    { word: 'mango', hint: 'A tropical fruit with a sweet taste' },
+    { word: 'nose', hint: 'The part of the face used for smelling' },
+    { word: 'owl', hint: 'A bird known for its hooting sound' },
+    { word: 'penguin', hint: 'A flightless bird that lives in the southern hemisphere' },
     { word: 'quilt', hint: 'A warm bed covering' },
-    { word: 'robot', hint: 'A machine capable of carrying out a complex series of actions' },
-    { word: 'scissors', hint: 'A tool for cutting paper or cloth' },
-    { word: 'telescope', hint: 'An instrument for observing distant objects' },
+    { word: 'robot', hint: 'A machine capable of carrying out complex tasks' },
+    { word: 'snow', hint: 'Frozen precipitation that falls from the sky' },
+    { word: 'telephone', hint: 'A device used for voice communication' },
     { word: 'umbrella', hint: 'A device used for protection against rain' },
-    { word: 'vaccine', hint: 'A substance used to stimulate immunity to diseases' },
-    { word: 'wheel', hint: 'A circular object that rotates' },
+    { word: 'vacuum', hint: 'An electrical device used for cleaning floors' },
+    { word: 'whale', hint: 'A large marine mammal' },
     { word: 'xylophone', hint: 'A musical instrument with wooden bars' },
-    { word: 'yogurt', hint: 'A dairy product made by fermenting milk' },
-    { word: 'zebra', hint: 'An African wild horse with black-and-white stripes' }
+    { word: 'yarn', hint: 'A long, thin strand used for knitting' },
+    { word: 'zeppelin', hint: 'A large airship' },
+    { word: 'ghost', hint: 'A spirit of a dead person' },
+    { word: 'vampire', hint: 'A creature that drinks blood' },
+    { word: 'witch', hint: 'A woman with magical powers' },
+    { word: 'haunted', hint: 'A place full of ghosts' },
+    { word: 'nightmare', hint: 'A scary dream' },
+    { word: 'poltergeist', hint: 'A ghostly apparition' },
+    { word: 'werewolf', hint: 'A human-wolf hybrid' },
+    { word: 'spirit', hint: 'A person or thing that is alive but not physically present' },
+    { word: 'death', hint: 'The end of life' },
+    { word: 'halloween', hint: 'A festival celebrated on October 31st' },
+    { word: 'apple', hint: 'A red, green, or yellow fruit' },
+    { word: 'Tokyo', hint: 'Capital of Japan' },
+    { word: 'kiwi', hint: 'A small fruit with a brown skin and green inside' },
+    { word: 'Berlin', hint: 'Capital of Germany' },
+    { word: 'banana', hint: 'A long, yellow fruit' },
+    { word: 'Paris', hint: 'Capital of France' },
+    { word: 'grape', hint: 'Small fruit that comes in clusters' },
+    { word: 'Rome', hint: 'Capital of Italy' },
+    { word: 'mango', hint: 'A sweet, yellow or orange fruit' },
+    { word: 'Beijing', hint: 'Capital of China' },
+    { word: 'carrot', hint: 'An orange root vegetable' },
+    { word: 'Ottawa', hint: 'Capital of Canada' },
+    { word: 'lemon', hint: 'A sour, yellow fruit' },
+    { word: 'Madrid', hint: 'Capital of Spain' },
+    { word: 'pear', hint: 'A fruit with a shape like a teardrop' },
+    { word: 'Moscow', hint: 'Capital of Russia' },
+    { word: 'pineapple', hint: 'A tropical fruit with a rough skin and sweet flesh' },
+    { word: 'Athens', hint: 'Capital of Greece' },
+    { word: 'orange', hint: 'A round, citrus fruit that is orange in color' },
+    { word: 'Vienna', hint: 'Capital of Austria' }
 ];
 
-// Function to select a random word and hint
-function selectRandomWord() {
-    const randomHint = hints[Math.floor(Math.random() * hints.length)];
-    randomWord = randomHint.word;
-    hint = randomHint.hint;
-    hintElement.textContent = `Hint: ${hint}`;
-    initializeWordBlanks();
+
+// Start game on clicking Start button
+// تعريف المتغيرات الرئيسية
+const playAgainWinButton = document.getElementById('play-again-win');
+
+// بدء اللعبة عند الضغط على زر Start
+document.getElementById('start-button').addEventListener('click', () => {
+    welcomeScreen.style.display = 'none';
+    gameScreen.style.display = 'block';
+    startGame();
+});
+
+// بدء لعبة جديدة
+function startGame() {
+    // إعادة تعيين المتغيرات
+    lives = 10;
+    livesCounterElement.textContent = `Lives: ${lives}`;
+    alphabetButtonsElement.innerHTML = '';
+    hangmanElement.innerHTML = `<img src="images/1.jpg" alt="Prison">`;
+    playAgainButton.style.display = 'none';
+    gameOverPopup.style.display = 'none';
+    winPopup.style.display = 'none';
+
+    // اختيار كلمة عشوائية من قائمة التلميحات
+    const randomIndex = Math.floor(Math.random() * hints.length);
+    const selectedHint = hints[randomIndex];
+    randomWord = selectedHint.word;
+    hint = selectedHint.hint;
+
+    // عرض التلميح
+    hintElement.textContent = hint ? `Hint: ${hint}` : 'No hint available for this word';
+
+    // إنشاء خطوط فارغة
+    wordBlanksElement.textContent = '_ '.repeat(randomWord.length).trim();
+
+    // إنشاء أزرار الحروف
+    createAlphabetButtons();
+
+    // تشغيل موسيقى الخلفية
+    backgroundMusic.currentTime = 0;
+    backgroundMusic.play();
+    backgroundMusic.volume = 0.5;
 }
 
-// Initialize word blanks with underscores
-function initializeWordBlanks() {
-    const underscores = randomWord.split('').map(() => '_').join(' ');
-    wordBlanksElement.textContent = underscores;
+// الحصول على تلميح للكلمة العشوائية
+function getHint(word) {
+    const hintObject = hints.find(h => h.word === word);
+    return hintObject ? hintObject.hint : '';
 }
 
-// Function to handle letter guesses
+// إنشاء أزرار الحروف الأبجدية
+function createAlphabetButtons() {
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+    alphabet.split('').forEach(letter => {
+        const button = document.createElement('button');
+        button.textContent = letter.toUpperCase();
+        button.addEventListener('click', () => handleGuess(letter, button));
+        alphabetButtonsElement.appendChild(button);
+    });
+}
+
+// التعامل مع تخمين المستخدم
 function handleGuess(letter, button) {
     button.disabled = true;
-    letter = letter.toLowerCase(); // Convert letter to lowercase
-    const lowerCaseWord = randomWord.toLowerCase(); // Convert the word to lowercase
+    letter = letter.toLowerCase(); // تحويل الحرف إلى صغير
+    const lowerCaseWord = randomWord.toLowerCase(); // تحويل الكلمة إلى صغيرة
     if (lowerCaseWord.includes(letter)) {
         const currentDisplay = wordBlanksElement.textContent.split(' ');
         for (let i = 0; i < randomWord.length; i++) {
             if (lowerCaseWord[i] === letter) {
-                currentDisplay[i] = randomWord[i].toUpperCase(); // Display correct letter in original case
+                currentDisplay[i] = randomWord[i].toUpperCase(); // عرض الحرف الصحيح بالحالة الأصلية
             }
         }
         wordBlanksElement.textContent = currentDisplay.join(' ');
 
-        // Check for win
+        // التحقق من الفوز
         if (!currentDisplay.includes('_')) {
             backgroundMusic.pause();
             winMessage.textContent = `Congratulations! You survived! The correct word was ${randomWord.toUpperCase()}.`;
             winPopup.style.display = 'block';
-            playAgainButton.style.display = 'block';  // Show play again button
+            playAgainButton.style.display = 'block';  // عرض زر اللعب من جديد
             
-            // Add click event for play again button
+            // إضافة حدث الضغط على زر اللعب من جديد
             playAgainButton.addEventListener('click', () => {
                 resetGame();
             });
@@ -191,22 +267,22 @@ function handleGuess(letter, button) {
         livesCounterElement.textContent = `Lives: ${lives}`;
         errorSound.play();
 
-        // Update hangman image
+        // تحديث صورة المشنوق
         const imageIndex = 10 - lives;
         if (imageIndex >= 1 && imageIndex <= hangmanImages.length) {
-            changeHangmanImage(hangmanImages[imageIndex - 1]);
+            hangmanElement.innerHTML = `<img src="${hangmanImages[imageIndex - 1]}" alt="Hangman Stage">`;
         }
 
-        // Increase music tension
+        // زيادة توتر الموسيقى
         backgroundMusic.playbackRate += 0.05;
 
-        // Check for loss
+        // التحقق من الخسارة
         if (lives === 0) {
             backgroundMusic.pause();
             gameOverSound.play();
             wordBlanksElement.textContent = randomWord.toUpperCase().split('').join(' ');
 
-            // Show game over popup
+            // عرض نافذة الخسارة
             gameOverPopup.style.display = 'block';
             gameOverPopup.querySelector('.popup-text').textContent = `You Lost! The correct word was ${randomWord.toUpperCase()}.`;
             disableAllButtons();
@@ -214,67 +290,17 @@ function handleGuess(letter, button) {
     }
 }
 
-// Function to change hangman image smoothly
-function changeHangmanImage(imageUrl) {
-    // First, fade out the current image
-    hangmanElement.classList.add('fade-out');
-    
-    // After the fade-out transition ends, change the image
-    setTimeout(() => {
-        hangmanElement.innerHTML = `<img src="${imageUrl}" alt="Hangman Stage">`;
-        
-        // Then, fade in the new image
-        hangmanElement.classList.remove('fade-out');
-    }, 500); // Adjust this time to match the fade-out duration
-}
-
-// Function to disable all buttons
+// تعطيل جميع الأزرار
 function disableAllButtons() {
-    const buttons = document.querySelectorAll('button');
+    const buttons = document.querySelectorAll('#alphabet-buttons button');
     buttons.forEach(button => button.disabled = true);
 }
 
-// Function to reset the game
-function resetGame() {
-    lives = 10;
-    livesCounterElement.textContent = `Lives: ${lives}`;
-    selectRandomWord();
-    hangmanElement.innerHTML = `<img src="${hangmanImages[0]}" alt="Hangman Stage">`;
-    winPopup.style.display = 'none';
-    gameOverPopup.style.display = 'none';
-    backgroundMusic.play();
-    initializeAlphabetButtons();
-}
+// بدء لعبة جديدة عند الضغط على زر Play Again
+restartButton.addEventListener('click', startGame);
 
-// Initialize alphabet buttons
-function initializeAlphabetButtons() {
-    alphabetButtonsElement.innerHTML = '';
-    'abcdefghijklmnopqrstuvwxyz'.split('').forEach(letter => {
-        const button = document.createElement('button');
-        button.textContent = letter.toUpperCase();
-        button.addEventListener('click', () => handleGuess(letter, button));
-        alphabetButtonsElement.appendChild(button);
-    });
-}
+// إغلاق نافذة الفوز وإعادة بدء اللعبة
+playAgainButton.addEventListener('click', startGame);
 
-// Add CSS for smooth image transition
-const style = document.createElement('style');
-style.textContent = `
-    #hangman {
-        transition: opacity 0.5s ease;
-    }
-    #hangman.fade-out {
-        opacity: 0;
-    }
-`;
-document.head.appendChild(style);
-
-// Start the game
-function startGame() {
-    welcomeScreen.style.display = 'none';
-    gameScreen.style.display = 'block';
-    resetGame();
-}
-
-// Start the game when the page loads
-window.onload = startGame;
+// إغلاق نافذة الفوز وإعادة بدء اللعبة عبر زر الفوز الخاص
+playAgainWinButton.addEventListener('click', startGame);
